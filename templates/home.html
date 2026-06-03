@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Pagina principal{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<p>Bienvenido {{ user.username }}!! tu edad es {{ user.age }}!!</p>
+<form action="{% url 'logout' %}" method="post">
+  {% csrf_token %}
+  <button type="submit">Cerrar sesion</button>
+</form>
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Iniciar sesion</a> |
+<a href="{% url 'signup' %}">Registrarse</a>
+{% endif %}
+{% endblock content %}
